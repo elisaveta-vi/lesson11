@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<title>lesson11</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			Шапка. position:fixed (большой z-индекс)
+		</header>
+		<main class="main">
+
+			<h1 class="title">Позиционирование</h1>
+			<div class="block">
+				<h2 class="subtitle">static -- по умолчанию</h2>
+				<p class="lid">Не можем использовать свойства top bottom right left и z-индекс</p>
+
+			</div>
+
+			<div class="block">
+				<h2 class="subtitle">relative</h2>
+				<p class="lid">Можем использовать свойство z-индекс. У всех трех блоков -- position:relative. Иерархия -- по положению в HTML </p>
+				<div class="block__item block__item_green">Я -- block-green </div>
+				<div class="block__item block__item_red">Я -- block-red </div>
+				<div class="block__item block__item_yellow">Я -- block-yellow </div>
+			</div>
+
+
+			<div class="block">
+
+				<p class="lid">Только у красного блока-- position:relative.</p>
+				<div class="block__item block__item_green block__item_green_static">Я -- block-green </div>
+				<div class="block__item block__item_red">Я -- block-red </div>
+				<div class="block__item block__item_yellow block__item_yellow_static">Я -- block-yellow </div>
+			</div>
+
+			<div class="block">
+				<p class="lid">У всех трех блоков -- position:relative. z-индекс у зеленого блока -- 2, у желтого --1, у красного -- по умолчанию -- auto</p>
+				<div class="block__item block__item_green block__item_green_z">Я -- block-green </div>
+				<div class="block__item block__item_red">Я -- block-red </div>
+				<div class="block__item block__item_yellow block__item_yellow_z">Я -- block-yellow </div>
+			</div>
+
+			<div class="block">
+				<p class="lid">z-индекс у вложенного элемента сработает в случае, если у его родителя position:static</p>
+				<div class="block__item block__item_green block__item_green_z">Я -- block-green
+				</div>
+				<div class="block__item block__item_red block__item_red_static"><span>Я -- span</span> </div>
+				<div class="block__item block__item_yellow block__item_yellow_z">Я -- block-yellow </div>
+			</div>
+
+
+			<div class="note">Cмещается относительно текущего положения. Не влияет на другие объекты</div>
+
+			<div class="part">
+				<p class="lid"> position:static(по умолчанию) <br> = position:relative(по умолчанию) </p>
+				<div class="part__space">
+
+					<div class="square"></div>
+				</div>
+			</div>
+
+			<div class="part">
+				<p class="lid"> left: 30px;
+					top: 50px;</p>
+				<div class="part__space">
+
+					<div class="square square_left"></div>
+				</div>
+			</div>
+
+			<div class="part">
+				<p class="lid"> right: 30px; </p>
+				<div class="part__space">
+
+					<div class="square square_minus"></div>
+				</div>
+			</div>
+
+			<div class="part">
+				<p class="lid"> left: 30%;
+					top: 50%; <br>Берется процент соответственно от ширины или высоты родителя, которые должны быть заданы</p>
+				<div class="part__space">
+
+					<div class="square square_persent"></div>
+				</div>
+			</div>
+
+
+
+			<div class="block">
+				<h2 class="subtitle">position:absolute</h2>
+				<p class="lid">Красному блоку задали position:absolute. top=0, left=0 <br>
+					В результате красный блок был вырван из потока и спозиционировался относително body <a href="#abs" class="link">(Левый верхний угол)</a></p>
+
+				<div class="block__item block__item_green">Я -- block-green </div>
+				<div id="abs" class="block__item block__item_red block__item_red_absolute">Я -- block-red </div>
+				<div class="block__item block__item_yellow">Я -- block-yellow </div>
+			</div>
+
+
+
+			<div class="block block_relative">
+				<h2 class="subtitle">position:absolute</h2>
+				<p class="lid">Красному блоку задали position:absolute. top=0, left=0 <br>
+					В результате красный блок был вырван из потока и спозиционировался относително релативного родителя</p>
+				<div class="block__item block__item_green">Я -- block-green </div>
+				<div class="block__item block__item_red block__item_red_absolute">Я -- block-red </div>
+				<div class="block__item block__item_yellow">Я -- block-yellow </div>
+			</div>
+
+			<div class="fix">
+				<h2 class="subtitle">position:fixed</h2>
+				<p>Позиционируется отосительно окна браузера (viewport) и не скролится <br>
+					Также, как и absolute, зависает в воздухе (условно-строчный) и имеет релативного родителя (right:0; bottom:0;)</p>
+				<div class="block-fix">Я -- fixed</div>
+			</div>
+
+			<h2 class="subtitle">position:stisky</h2>
+			<p>Изначально ведет себя как static. Когда доходит до определенной позиции (например: top: 0), то прилипает к ней и начинает вести себя, как fixed <br>
+				Чтобы свойство работало, указываем для body (вместо wrapper) -- {overflow-x:hidden}</p>
+			<div class="block-sticky">
+				<div>я -- static</div>
+				<div>я -- stisky</div>
+				<div>я -- static</div>
+				<div>я -- stisky</div>
+				<div>я -- static</div>
+			</div>
+
+
+			<h2 class="subtitle">Список с использованием абсолютного позиционирования и псевдоэлемента before</h2>
+			<p>Рассматриваем элемент списка li. Присваиваем ему position:relative. <br>
+				псевдоэлементу before -- position:absolute</p>
+			<ul class="list">
+				<li class="list__item">Lorem ipsum dolor si.</li>
+				<li class="list__item">Lorem ipsum dolor si.</li>
+				<li class="list__item">Lorem ipsum dolor si.</li>
+				<li class="list__item">Lorem ipsum dolor si.</li>
+				<li class="list__item">Lorem ipsum dolor si.</li>
+			</ul>
+
+			<h2 class="subtitle">Затемнение картинки, являющейся ссылкой</h2>
+			<p>Используем псевдоэлемент ::before и position: absolute </p>
+			<a href="#" class="image-box"> <img src="img/girl.jpg" alt="girl" class="image-box__image"></a>
+		</main>
+		<footer class="footer">
+			<a href="https://elisaveta-vi.github.io/lesson11_figma/" class="figma" target="_blank">Макет figma</a>
+		</footer>
+	</div>
+</body>
+
+</html>
